@@ -147,6 +147,15 @@ Optionaly prompt for regexp to search."
   (interactive "P")
   (grep-o-matic-directory prompt (grep-o-matic-repository-root buffer-file-name)))
 
+
+(defun grep-o-matic-repository-interactive (&optional prompt)
+  "Search repository for word at point.
+Optionaly prompt for regexp to search."
+  (interactive "P")
+  (grep-o-matic-directory 'true
+			  (expand-file-name
+			   (read-directory-name "Dir? " default-directory))))
+
 (defun grep-o-matic-current-directory (&optional prompt)
   "Search current directory for word at point.
 Optionaly prompt for regexp to search."
@@ -186,6 +195,8 @@ Optionaly prompt for regexp to search."
 (define-prefix-command 'grep-o-matic-map)
 (define-key grep-o-matic-map "\M-/" 'grep-o-matic-repository)
 (define-key grep-o-matic-map "/" 'grep-o-matic-repository)
+(define-key grep-o-matic-map "\M-]" 'grep-o-matic-repository-interactive)
+(define-key grep-o-matic-map "]" 'grep-o-matic-repository-interactive)
 (define-key grep-o-matic-map "\M-." 'grep-o-matic-current-directory)
 (define-key grep-o-matic-map "." 'grep-o-matic-current-directory)
 (define-key grep-o-matic-map "\M-," 'grep-o-matic-visited-files)
